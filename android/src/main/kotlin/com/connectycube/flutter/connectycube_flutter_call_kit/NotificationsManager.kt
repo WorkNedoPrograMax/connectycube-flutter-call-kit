@@ -195,41 +195,42 @@ fun getLaunchIntent(context: Context): Intent? {
 }
 
 fun createCallNotification(
-    context: Context,
-    title: String,
-    callName: String?,
-    pendingIntent: PendingIntent,
-    ringtone: Uri,
-    isVideoCall: Boolean,
-    callData: Bundle
+        context: Context,
+        title: String,
+        callName: String?,
+        pendingIntent: PendingIntent,
+        ringtone: Uri,
+        isVideoCall: Boolean,
+        callData: Bundle
 ): NotificationCompat.Builder {
     val person = Person.Builder()
-        .setName(title)
-        .setImportant(true)
-        .build()
+            .setName(title)
+            .setImportant(true)
+            .build()
 
     val style = NotificationCompat.CallStyle.forIncomingCall(
-        person,
-        getRejectCallIntent(context, callData, title.hashCode()),
-        getAcceptCallIntent(context, callData, title.hashCode())
+            person,
+            getRejectCallIntent(context, callData, title.hashCode()),
+            getAcceptCallIntent(context, callData, title.hashCode())
     )
     style.setIsVideo(isVideoCall)
 
     val notificationBuilder = NotificationCompat.Builder(context, CALL_CHANNEL_ID)
     notificationBuilder
-        .setContentText(callName)
-        .setStyle(style)
-        .addPerson(person)
-        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        .setAutoCancel(true)
-        .setOngoing(true)
-        .setCategory(NotificationCompat.CATEGORY_CALL)
-        .setContentIntent(pendingIntent)
-        .setSound(ringtone)
-        .setPriority(NotificationCompat.PRIORITY_MAX)
-        .setTimeoutAfter(60000)
+            .setContentText(callName)
+            .setStyle(style)
+            .addPerson(person)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setAutoCancel(false) // Set to false to prevent dismissal on tap
+            .setOngoing(true)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setContentIntent(pendingIntent)
+            .setSound(ringtone)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setTimeoutAfter(60000)
     return notificationBuilder
 }
+
 
 fun getAcceptCallIntent(
     context: Context,
