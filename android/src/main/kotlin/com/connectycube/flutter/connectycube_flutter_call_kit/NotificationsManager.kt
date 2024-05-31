@@ -221,7 +221,7 @@ fun createCallNotification(
         .setStyle(style)
         .addPerson(person)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        .setAutoCancel(true)
+        .setAutoCancel(false)
         .setOngoing(true)
         .setCategory(NotificationCompat.CATEGORY_CALL)
         .setContentIntent(pendingIntent)
