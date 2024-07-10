@@ -26,5 +26,3 @@ flutter:
       android:
         package: com.connectycube.flutter.connectycube_flutter_call_kit
         pluginClass: ConnectycubeFlutterCallKitPlugin
-      ios:
-        pluginClass: ConnectycubeFlutterCallKitPlugin
